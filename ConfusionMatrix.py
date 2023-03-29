@@ -18,7 +18,7 @@ class ConfusionMatrix:
                 FN += 1
             else:
                 TN += 1
-        print("TP: ", TP, " FP: ", FP, " TN: ", TN, " FN:", FN)
+        print("TP:", TP, " FP:", FP, "\nTN:", TN, " FN:", FN,)
         print("accuracy for class " + str(klasa) + ": ", ((TP + TN) / (TP + TN + FP + FN)), " precision: ",
               (TP / (TP + FP)), " recall: ",
-              (TP / (TP + FN)))
+              (TP / (TP + FN)), '\n')

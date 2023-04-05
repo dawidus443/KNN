@@ -15,6 +15,7 @@ class KNN:
         return np.array(y_pred)
 
     def _predict(self, x):
+        # oblicznie odległości dla każdego wiersza
         distances = [np.sqrt(np.sum((x - x_train) ** 2)) for x_train in self.X_train]
         k_indices = np.argsort(distances)[:self.k]
         k_labels = [self.y_train[i] for i in k_indices]

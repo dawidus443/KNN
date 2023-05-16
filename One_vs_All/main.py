@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
 
-from BinaryClassifier import BinaryClassifier
 from Accuracy import Accuracy
 from ConfusionMatrix import ConfusionMatrix
 from OneVsAll import OneVsAll
+from BinaryClassifier import BinaryClassifier
 
 # pobranie danych
 iris_data_train = pd.read_csv(r'iris_training_e.csv')
@@ -39,7 +39,6 @@ y_train = np.array(y_train)
 X_validation = np.array(X_validation)
 y_validation = np.array(y_validation)
 
-
 # Uczenie klasyfikatora OneVsAll i klasyfikacja próbek w zbiorze testowym
 ova = OneVsAll(estimator=BinaryClassifier, n_classes=3)
 ova.fit(X_train, y_train)
@@ -50,7 +49,7 @@ accuracy = Accuracy()
 accuracy.calculate(y_validation, y_pred)
 print('Dokładność klasyfikacji: {:.2f}%'.format(accuracy.print() * 100), '\n')
 
-print(y_validation ,"\n")
+print(y_validation , "\n")
 print(y_pred , "\n")
 
 # obliczenie macierzy pomyłek

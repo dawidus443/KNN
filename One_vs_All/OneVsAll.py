@@ -22,5 +22,3 @@ class OneVsAll:
         """
         # Wybór klasy z najwyższym wynikiem prawdopodobieństwa dla każdej próbki.
         return np.argmax([estimator.predict_proba(X)[:, 1] for estimator in self.estimators], axis=0)
-
-

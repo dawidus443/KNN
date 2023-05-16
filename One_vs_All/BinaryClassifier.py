@@ -1,7 +1,4 @@
 import numpy as np
-import numpy as np
-
-import numpy as np
 
 
 class BinaryClassifier:
@@ -29,14 +26,6 @@ class BinaryClassifier:
             self.weights -= self.lr * dw
             self.bias -= self.lr * db
 
-    def predict(self, X):
-        # obliczenie wyników dla każdej próbki i przypisanie etykiet
-        linear_model = np.dot(X, self.weights) + self.bias
-        y_pred = self._sigmoid(linear_model)
-        y_pred_labels = (y_pred > 0.5).astype(int)
-
-        return y_pred_labels
-
     def predict_proba(self, X):
         # obliczenie wyników dla każdej próbki
         linear_model = np.dot(X, self.weights) + self.bias
@@ -48,4 +37,15 @@ class BinaryClassifier:
     def _sigmoid(self, z):
         # funkcja sigmoidalna
         return 1 / (1 + np.exp(-z))
+
+
+
+
+    # def predict(self, X):
+    #     # obliczenie wyników dla każdej próbki i przypisanie etykiet
+    #     linear_model = np.dot(X, self.weights) + self.bias
+    #     y_pred = self._sigmoid(linear_model)
+    #     y_pred_labels = (y_pred > 0.5).astype(int)
+    #
+    #     return y_pred_labels
 

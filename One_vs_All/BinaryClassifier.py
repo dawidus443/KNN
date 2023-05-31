@@ -20,8 +20,8 @@ class BinaryClassifier:
             y_pred = self._sigmoid(linear_model)
 
             # obliczenie gradientów i aktualizacja wag i biasu
-            dw = (1 / len(X)) * np.dot(X.T, (y_pred - y))
-            db = (1 / len(X)) * np.sum(y_pred - y)
+            dw = np.dot(X.T, (y_pred - y))
+            db = np.sum(y_pred - y)
 
             self.weights -= self.lr * dw
             self.bias -= self.lr * db
@@ -32,11 +32,17 @@ class BinaryClassifier:
         y_pred = self._sigmoid(linear_model)
 
         # zwrócenie prawdopodobieństw klasyfikacji dla klasy pozytywnej
-        return np.column_stack((1 - y_pred, y_pred))
+        return y_pred
 
     def _sigmoid(self, z):
         # funkcja sigmoidalna
         return 1 / (1 + np.exp(-z))
+
+
+
+
+
+
 
 
 

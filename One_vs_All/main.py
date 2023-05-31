@@ -5,6 +5,7 @@ from Accuracy import Accuracy
 from ConfusionMatrix import ConfusionMatrix
 from OneVsAll import OneVsAll
 from BinaryClassifier import BinaryClassifier
+from One_vs_All.PerceptronClassifier import PerceptronClassifier
 
 # pobranie danych
 iris_data_train = pd.read_csv(r'iris_training_e.csv')
@@ -18,7 +19,7 @@ for column in iris_data_train.columns:
         for i in range(len(unique_values)):
             labels[unique_values[i]] = i
         iris_data_train[column] = iris_data_train[column].map(labels)
-#23-27
+
 for column in iris_data_validation.columns:
     if iris_data_validation[column].dtypes != "float64":
         labels = {}
@@ -26,6 +27,13 @@ for column in iris_data_validation.columns:
         for i in range(len(unique_values)):
             labels[unique_values[i]] = i
         iris_data_validation[column] = iris_data_validation[column].map(labels)
+
+
+# Wymieszanie danych treningowych
+iris_data_train = iris_data_train.sample(frac=1).reset_index(drop=True)
+
+# Wymieszanie danych walidacyjnych
+iris_data_validation = iris_data_validation.sample(frac=1).reset_index(drop=True)
 
 X_train = iris_data_train.drop(['outputs'], axis = 1)
 y_train = iris_data_train['outputs']
@@ -40,7 +48,7 @@ X_validation = np.array(X_validation)
 y_validation = np.array(y_validation)
 
 # Uczenie klasyfikatora OneVsAll i klasyfikacja próbek w zbiorze testowym
-ova = OneVsAll(estimator=BinaryClassifier, n_classes=3)
+ova = OneVsAll(estimator=PerceptronClassifier, n_classes=3)
 ova.fit(X_train, y_train)
 y_pred = ova.predict(X_validation)
 
@@ -49,8 +57,8 @@ accuracy = Accuracy()
 accuracy.calculate(y_validation, y_pred)
 print('Dokładność klasyfikacji: {:.2f}%'.format(accuracy.print() * 100), '\n')
 
-print(y_validation , "\n")
-print(y_pred , "\n")
+# print(y_validation , "\n")
+# print(y_pred , "\n")
 
 # obliczenie macierzy pomyłek
 confusion_matrix = ConfusionMatrix()

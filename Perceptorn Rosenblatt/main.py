@@ -33,7 +33,7 @@ accuracy = perceptron.test(X_validation, y_validation)
 
 y_pred = perceptron.predict_all(X_validation)
 
-print("Dokładność: {:.2%}".format(accuracy))
+print("Dokładność: {:.2%}".format(accuracy), "\n")
 
 confusion_matrix = ConfusionMatrix()
 print('Tablica pomyłek: ')

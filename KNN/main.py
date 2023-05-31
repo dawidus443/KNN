@@ -26,6 +26,12 @@ for column in iris_data_validation.columns:
             labels[unique_values[i]] = i
         iris_data_validation[column] = iris_data_validation[column].map(labels)
 
+# Wymieszanie danych treningowych
+iris_data_train = iris_data_train.sample(frac=1).reset_index(drop=True)
+
+# Wymieszanie danych walidacyjnych
+iris_data_validation = iris_data_validation.sample(frac=1).reset_index(drop=True)
+
 # # wymieszanie danych
 # np.random.shuffle(iris_data_train.values)
 # np.random.shuffle(iris_data_validation.values)
